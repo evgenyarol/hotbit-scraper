@@ -1,0 +1,30 @@
+{
+  "chat": {
+    "_": "channel",
+    "flags": 8288,
+    "broadcast": true,
+    "id": 1389202686,
+    "access_hash": "11459143346940569143",
+    "title": "Hotbit Pump Events",
+    "username": "HotbitPumpEvents",
+    "photo": {
+      "_": "chatPhoto",
+      "photo_small": {
+        "_": "fileLocation",
+        "dc_id": 4,
+        "volume_id": "400363700673",
+        "local_id": 8829,
+        "secret": "16137502290829049349"
+      },
+      "photo_big": {
+        "_": "fileLocation",
+        "dc_id": 4,
+        "volume_id": "400363700673",
+        "local_id": 8831,
+        "secret": "18062903657382316786"
+      }
+    },
+    "date": 1651872220,
+    "version": 0
+  }
+}
