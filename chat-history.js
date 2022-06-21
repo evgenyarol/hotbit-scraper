@@ -1,10 +1,8 @@
 const { pluck } = require("ramda");
 const { inputField } = require("./utils/fixtures");
 const config = require("./config");
-const fetch = require("node-fetch");
-const db = require("./utils/db");
-const axios = require("axios-https-proxy-fix");
 const telegram = require("./utils/init");
+const { checkPair } = require("./utils/fast-buy");
 
 const getChat = async () => {
   const dialogs = await telegram("messages.getDialogs", {
@@ -16,105 +14,66 @@ const getChat = async () => {
 };
 
 const chatHistory = async (chat) => {
-  let lastIdofMsgs = await db.getLastMsgId();
-
-  const max = config.telegram.msgHistory.maxMsg;
-  const limit = config.telegram.msgHistory.limit || 99;
+  const limit = config.telegram.msgHistory.limit || 1;
   let offsetId = 0;
   let full = [],
     messages = [];
-
-  do {
-    let history = await telegram("messages.getHistory", {
-      peer: {
-        _: "inputPeerChannel",
-        channel_id: chat.id,
-        access_hash: chat.access_hash,
-      },
-      max_id: -offsetId,
-      offset: -full.length,
-      limit,
-    });
-
-    messages = history.messages.filter(filterLastDay);
-    full = full.concat(messages);
-    messages.length > 0 && (offsetId = messages[0].id);
-
-    if (messages.length > 0) {
-      await db.updateLastMsgId(messages[0].id);
-    }
-    history = null;
-  } while (messages.length === limit && full.length < max);
-
-  const showNew = full.filter(({ id }) => id > lastIdofMsgs);
-  const noRepeats = uniqueArray(showNew, "id");
-  const usersMsg = noRepeats.filter(filterUsersMessages);
-
-  if (usersMsg.length > 0) {
-    const done = await sendToServer(usersMsg);
-
-    printMessages(usersMsg);
-    console.log("saved to server: ", done);
-    console.log("Last msg id ", messages[0].id);
-  }
-  lastIdofMsgs = await db.getLastMsgId();
-  const dt = new Date();
-  //console.log(JSON.parse(messages[0]));
-  //console.log(messages);
-  //console.log(messages[6].message);
-  console.log(messages[0].message);
-  // const url = `https://api.hotbit.io/api/v1/market.last?market=${messages[0].message}/USDT`;
-  // const { data } = await axios.get(url, {
-  //   headers: {
-  //     "Cache-Control": "no-cache",
-  //     Pragma: "no-cache",
-  //     Expires: "0",
-  //   },
-  // });
-  // console.log(data.result);
-};
-
-let sent = [];
-
-const sendToServer = async (messages) => {
-  let toPush = messages.filter((m) => {
-    return sent.indexOf(m) < 0;
+  let history = await telegram("messages.getHistory", {
+    peer: {
+      _: "inputPeerChannel",
+      channel_id: chat.id,
+      access_hash: chat.access_hash,
+    },
+    max_id: -offsetId,
+    offset: -full.length,
+    limit,
   });
-  messages.forEach((m) => {
-    sent.push(m.id);
-  });
-  // const response = await fetch(config.server, {
-  //   method: "POST",
-  //   body: JSON.stringify(toPush),
-  //   headers: { "Content-Type": "application/json" },
-  // });
-  //const json = await response.json();
-  //console.log(json);
-  console.log(toPush);
-  //return json;
+
+  //await checkPair("MILKY");
+  console.log(history.messages[0].message, new Date());
+  //console.log(messages[0].message, new Date());
 };
 
-const printMessages = (messages) => {
-  const formatted = messages.map(formatMessage);
-  formatted.forEach((e) => console.log("MESSAGE ", e));
-};
+// const sendToServer = async (messages) => {
+//   //console.log(messages);
+//   let toPush = messages.filter((m) => {
+//     return sent.indexOf(m) < 0;
+//   });
+//   messages.forEach((m) => {
+//     sent.push(m.id);
+//   });
+//   // const response = await fetch(config.server, {
+//   //   method: "POST",
+//   //   body: JSON.stringify(toPush),
+//   //   headers: { "Content-Type": "application/json" },
+//   // });
+//   //const json = await response.json();
+//   //console.log(json);
+//   //console.log(toPush, "hui");
+//   //return json;
+// };
 
-const uniqueArray = function (myArr, prop) {
-  return myArr.filter((obj, pos, arr) => {
-    return arr.map((mapObj) => mapObj[prop]).indexOf(obj[prop]) === pos;
-  });
-};
-const filterLastDay = ({ date }) => new Date(date * 1e3) > dayRange();
-const dayRange = () => Date.now() - new Date(86400000 * 4);
-const filterUsersMessages = ({ _ }) => _ === "message";
+// const printMessages = (messages) => {
+//   const formatted = messages.map(formatMessage);
+//   formatted.forEach((e) => console.log("MESSAGE ", e));
+// };
 
-const formatMessage = ({ message, date, id }) => {
-  console.log(message);
-  const dt = new Date(date * 1e3);
-  const hours = dt.getHours();
-  const mins = dt.getMinutes();
-  return `${hours}:${mins} [${id}] ${message}`;
-};
+// const uniqueArray = function (myArr, prop) {
+//   return myArr.filter((obj, pos, arr) => {
+//     return arr.map((mapObj) => mapObj[prop]).indexOf(obj[prop]) === pos;
+//   });
+// };
+// const filterLastDay = ({ date }) => new Date(date * 1e3) > dayRange();
+// const dayRange = () => Date.now() - new Date(86400000 * 4);
+// const filterUsersMessages = ({ _ }) => _ === "message";
+
+// const formatMessage = ({ message, date, id }) => {
+//   console.log(message);
+//   const dt = new Date(date * 1e3);
+//   const hours = dt.getHours();
+//   const mins = dt.getMinutes();
+//   return `${hours}:${mins} [${id}] ${message}`;
+// };
 
 const selectChat = async (chats) => {
   const chatNames = pluck("title", chats);

@@ -15,6 +15,7 @@
   "dependencies": {
     "axios-https-proxy-fix": "^0.17.1",
     "dotenv": "^6.0.0",
+    "form-data": "^4.0.0",
     "mtproto-storage-fs": "^0.3.1",
     "node-fetch": "^2.6.1",
     "prompt": "^1.0.0",

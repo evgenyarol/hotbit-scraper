@@ -19,7 +19,7 @@ const start = async () => {
   let timerId = setTimeout(function tick() {
     run(chat);
     timerId = setTimeout(tick, 1000);
-  }, 1000);
+  }, 100);
 };
 
 start();
