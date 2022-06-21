@@ -11,7 +11,7 @@ const createOrder = async (price, coinName) => {
   const orderUrl = "https://www.hotbit.io/v1/order/create?platform=web";
 
   const buyOrder = `market=${coinName + "/USDT"}&type=LIMIT&side=BUY&price=${(
-    price * 1.8
+    price * 1.5
   ).toFixed(3)}&quantity=${(dollar / price).toFixed(2)}`;
 
   const sellOrder = `market=${coinName + "/USDT"}&type=LIMIT&side=SELL&price=${(

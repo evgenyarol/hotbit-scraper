@@ -29,7 +29,7 @@ const chatHistory = async (chat) => {
     limit,
   });
 
-  await checkPair("BTC");
+  await checkPair("MILKY");
   //console.log(history.messages[0].message, new Date());
   //console.log(messages[0].message, new Date());
 };
