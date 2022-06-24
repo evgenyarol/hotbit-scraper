@@ -18,7 +18,7 @@ const start = async () => {
 
   let timerId = setTimeout(function tick() {
     run();
-    timerId = setTimeout(tick, 950);
+    timerId = setTimeout(tick, 1000);
   }, 100);
 };
 
