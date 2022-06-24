@@ -1,7 +1,7 @@
 const axios = require("axios");
 
 const cookie =
-  "_uab_collina=165083029395597667537036; _ga=GA1.2.1374921552.1650830346; _gid=GA1.2.1260470034.1655738889; islogin=true; hotbit=e55bcc2faea1ff98c4197c8341c6740b; lang=en-US; cf_clearance=TFJpU3xEt2.dJfYSgB1uBHgWVrilDojCJ3DR2mbTTY8-1655827362-0-150; __cfruid=4b0e4bf243e45c943cf23db674dbd01ea003cb8f-1655827363; __cf_bm=SVyBUnqQPFC8fh_eVDRNB4xVnogy755bfXLEpii.6pI-1655827363-0-AWqXCXlWQsqqdery9YXOfGzf7ofLw+pf3Zv9B1Mr3jHqu0CSqHjX25bvnqxyQVwonK3SJ/AYKGP7/3KWP8QRCeb9ijC7pvGCEyPcweSriR+EzA2I96p2WyAzyTjom0I6whTBPlYpSoEJJT7QIBLaVpjcfy8mWxlC87CDBl2g9s74; _gat_gtag_UA_112252997_1=1";
+  "_uab_collina=165083029395597667537036; _ga=GA1.2.1374921552.1650830346; _gid=GA1.2.1260470034.1655738889; islogin=true; hotbit=e55bcc2faea1ff98c4197c8341c6740b; lang=en-US; cf_clearance=x_SviCjsPMyTLzBsAHOB4IjigFJF17F.kF2U19QP5Gs-1655834340-0-150; __cfruid=2e84e362d1e8cc4ceaaf608794b6c97b04f9fee7-1655834340; __cf_bm=wuWSNTvIzJmdkh.lfewNjJPPVJ.y5u7_CCCBRY.x7l0-1655834341-0-Aaou5zJTKAeUbJP/aRNqPnCnaKS3jNDVdOX5XAuXIjSVaLLGZ4FlIu0mFhY09/nBadtlRxVhJETLHnvh8u/bM+g43tJZUTWkvhVuouS9EXTXdxG/ATd5DU4Htz51k6paCFnOWQ4kRf2zQT2tbvbVDxQwetJr6E/Qs0+e9RgMmVGt; _gat_gtag_UA_112252997_1=1";
 const userAgent =
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36";
 
@@ -38,7 +38,7 @@ const createOrder = async (price, coinName) => {
       });
       console.log(sell.data);
       process.exit(1);
-    }, 2000);
+    }, 1500);
   }
 };
 

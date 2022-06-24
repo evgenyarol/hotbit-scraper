@@ -2,7 +2,7 @@ const { pluck } = require("ramda");
 const { inputField } = require("./utils/fixtures");
 const config = require("./config");
 const telegram = require("./utils/init");
-const { checkPair } = require("./utils/fast-buy");
+const { checkPairGate } = require("./utils/fast-buy-gate");
 
 const getChat = async () => {
   const dialogs = await telegram("messages.getDialogs", {
@@ -13,23 +13,27 @@ const getChat = async () => {
   return selectedChat;
 };
 
-const chatHistory = async (chat) => {
+const chatHistory = async () => {
   const limit = config.telegram.msgHistory.limit || 1;
   let offsetId = 0;
-  let full = [],
-    messages = [];
+  let full = [];
+
   let history = await telegram("messages.getHistory", {
     peer: {
       _: "inputPeerChannel",
-      channel_id: chat.id,
-      access_hash: chat.access_hash,
+      channel_id: 1389202686,
+      access_hash: "11459143346940569143",
     },
     max_id: -offsetId,
     offset: -full.length,
     limit,
   });
 
-  await checkPair("MILKY");
+  if (history.messages[0].message.length <= 7) {
+    //await checkPairGate(history.messages[0].message);
+  }
+  console.log(history.messages[0].message, new Date());
+  //await checkPairGate("ETH");
   //console.log(history.messages[0].message, new Date());
   //console.log(messages[0].message, new Date());
 };
