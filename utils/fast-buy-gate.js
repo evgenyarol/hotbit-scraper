@@ -43,7 +43,7 @@ const checkPairGate = async (name) => {
     console.log(s);
     await createOrder(s.body[0]);
   } catch (e) {
-    console.log("GATE BUY ERROR ", e);
+    console.log("GATE BUY ERROR ", e.response.status);
     // if (e.response.data.label === 'INVALID_CURRENCY') {
     //   await checkPairMexc(name, volume);
     // }
