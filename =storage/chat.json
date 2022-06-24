@@ -3,28 +3,28 @@
     "_": "channel",
     "flags": 8288,
     "broadcast": true,
-    "id": 1389202686,
-    "access_hash": "11459143346940569143",
-    "title": "Hotbit Pump Events",
-    "username": "HotbitPumpEvents",
+    "id": 1553697661,
+    "access_hash": "8320114249569471449",
+    "title": "Gate.io Pump Signals",
+    "username": "kriptogateiopump",
     "photo": {
       "_": "chatPhoto",
       "photo_small": {
         "_": "fileLocation",
         "dc_id": 4,
-        "volume_id": "400363700673",
-        "local_id": 8829,
-        "secret": "16137502290829049349"
+        "volume_id": "400388100805",
+        "local_id": 58708,
+        "secret": "803809756626919853"
       },
       "photo_big": {
         "_": "fileLocation",
         "dc_id": 4,
-        "volume_id": "400363700673",
-        "local_id": 8831,
-        "secret": "18062903657382316786"
+        "volume_id": "400388100805",
+        "local_id": 58710,
+        "secret": "16352906032504142330"
       }
     },
-    "date": 1651872220,
+    "date": 1656027915,
     "version": 0
   }
 }

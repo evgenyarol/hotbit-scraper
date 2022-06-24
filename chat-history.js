@@ -21,8 +21,8 @@ const chatHistory = async () => {
   let history = await telegram("messages.getHistory", {
     peer: {
       _: "inputPeerChannel",
-      channel_id: 1389202686,
-      access_hash: "11459143346940569143",
+      channel_id: 1553697661,
+      access_hash: "8320114249569471449",
     },
     max_id: -offsetId,
     offset: -full.length,
@@ -30,12 +30,10 @@ const chatHistory = async () => {
   });
 
   if (history.messages[0].message.length <= 7) {
-    //await checkPairGate(history.messages[0].message);
+    await checkPairGate(history.messages[0].message);
   }
   console.log(history.messages[0].message, new Date());
-  //await checkPairGate("ETH");
-  //console.log(history.messages[0].message, new Date());
-  //console.log(messages[0].message, new Date());
+  // await checkPairGate("ETH");
 };
 
 // const sendToServer = async (messages) => {

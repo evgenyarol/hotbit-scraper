@@ -9,7 +9,7 @@ const run = async () => {
 const start = async () => {
   await checkLogin();
 
-  //let chat = await db.getChat();
+  // let chat = await db.getChat();
 
   // if (!chat) {
   //   chat = await getChat();
