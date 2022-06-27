@@ -29,9 +29,10 @@ const chatHistory = async () => {
     limit,
   });
 
-  if (history.messages[0].message.length <= 7) {
-    await checkPairGate(history.messages[0].message);
+  if (history.messages[0].message.length <= 13) {
+    await checkPairGate(history.messages[0].message.split(" ")[0]);
   }
+  //await checkPair("DOUGH");
   console.log(history.messages[0].message, new Date());
   // await checkPairGate("ETH");
 };

@@ -9,12 +9,12 @@ const run = async () => {
 const start = async () => {
   await checkLogin();
 
-  // let chat = await db.getChat();
+  let chat = await db.getChat();
 
-  // if (!chat) {
-  //   chat = await getChat();
-  //   await db.updateChat(chat);
-  // }
+  if (!chat) {
+    chat = await getChat();
+    await db.updateChat(chat);
+  }
 
   let timerId = setTimeout(function tick() {
     run();
